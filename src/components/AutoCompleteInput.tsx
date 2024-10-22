@@ -1,13 +1,12 @@
 import React from "react";
 import DropdownEntry from "./DropdownEntry";
 
-const AutoCompleteInput = ({
+const AutoCompleteInput: React.FC = ({
   data = [],
   onChangeHandler,
   searchTerm,
   handleOnSelect,
 }) => {
-  const DEBOUNCE_DELAY = 500;
 
   return (
     <div className="dropdown is-active">

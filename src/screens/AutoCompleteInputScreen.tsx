@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { AutoCompleteInput } from './../components';
-const AutoCompleteInputScreen = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+import React, { useState, useEffect, useCallback } from "react";
+import { AutoCompleteInput } from "../components";
+const AutoCompleteInputScreen: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState("");
   const [list, setList] = useState([]);
 
   const debounce = (func, wait) => {
@@ -16,13 +16,13 @@ const AutoCompleteInputScreen = () => {
   const fetchData = async (q) => {
     try {
       const response = await fetch(
-        `https://dummyjson.com/recipes/search?q=${q}`
+        `https://dummyjson.com/recipes/search?q=${q}`,
       );
       const data = await response.json();
-      console.log('data- ', data?.recipes);
+      console.log("data- ", data?.recipes);
       setList(data?.recipes);
     } catch (error) {
-      console.log('error occurred- ', error);
+      console.log("error occurred- ", error);
     }
   };
 
@@ -38,7 +38,7 @@ const AutoCompleteInputScreen = () => {
   };
 
   const handleOnSelect = useCallback((text) => {
-    console.log('Selected value: ', text);
+    console.log("Selected value: ", text);
     setSearchTerm(text);
   }, []);
 

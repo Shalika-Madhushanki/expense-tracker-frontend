@@ -1,14 +1,15 @@
-/* eslint-disable react/prop-types */
-import React, { useState } from 'react';
-import { Space, CalendarPicker, Button } from 'antd-mobile'
+import React, { useState } from "react";
+import { Space, CalendarPicker, Button } from "antd-mobile";
 
-const DatePicker = ({ date, onChangeHandler }) => {
+const DatePicker: React.FC = ({ date, onChangeHandler }) => {
   const [visible, setVisible] = useState(false);
 
   return (
     <Space block direction="vertical" style={styles.container}>
       <div style={styles.label}>Date</div>
-      <Button block onClick={() => setVisible(true)}>{date ? date.toDateString() : 'Select Date'}</ Button >
+      <Button block onClick={() => setVisible(true)}>
+        {date ? date.toDateString() : "Select Date"}
+      </Button>
       <CalendarPicker
         visible={visible}
         selectionMode="single"
@@ -26,10 +27,10 @@ const DatePicker = ({ date, onChangeHandler }) => {
 
 const styles = {
   label: {
-    fontSize: '16px',
-    color: '#999',
-    marginBottom: 2
+    fontSize: "16px",
+    color: "#999",
+    marginBottom: 2,
   },
-}
+};
 
 export default DatePicker;

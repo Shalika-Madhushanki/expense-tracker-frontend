@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
-import React from 'react';
+import React from "react";
 
-const DropDownInput = ({
+const DropDownInput: React.FC = ({
   name,
   label,
   optionsList,

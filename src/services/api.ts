@@ -20,7 +20,7 @@ const handleApiResponse = async (response) => {
 
 export const apiCall = async (
   endpoint: string,
-  method = "GET",
+  method: string,
   body = null,
   headers = {},
 ) => {

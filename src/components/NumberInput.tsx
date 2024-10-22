@@ -1,8 +1,13 @@
-/* eslint-disable react/prop-types */
-import React from 'react';
-import { Space, Input } from 'antd-mobile'
+import React from "react";
+import { Space, Input } from "antd-mobile";
 
-const NumberInput = ({ label, placeholder, value, onChangeHandler, ...rest }) => {
+const NumberInput: React.FC = ({
+  label,
+  placeholder,
+  value,
+  onChangeHandler,
+  ...rest
+}) => {
   return (
     <Space direction="vertical" style={styles.container}>
       <div style={styles.label}>{label}</div>
@@ -25,25 +30,25 @@ const NumberInput = ({ label, placeholder, value, onChangeHandler, ...rest }) =>
 
 const styles = {
   container: {
-    width: '40%',
+    width: "40%",
   },
   label: {
-    fontSize: '16px',
-    color: '#999',
-    marginBottom: -10
+    fontSize: "16px",
+    color: "#999",
+    marginBottom: -10,
   },
   icon: {
     paddingLeft: 5,
     paddingRight: 10,
     fontSize: 22,
-    color: '#999'
+    color: "#999",
   },
   textInput: {
-    width: '40%',
-    backgroundColor: '#000',
+    width: "40%",
+    backgroundColor: "#000",
     padding: 10,
     borderRadius: 5,
-  }
-}
+  },
+};
 
 export default NumberInput;

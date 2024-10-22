@@ -1,10 +1,15 @@
-/* eslint-disable react/prop-types */
-import React from 'react';
-import { Space, TextArea } from 'antd-mobile'
+import React from "react";
+import { Space, TextArea } from "antd-mobile";
 
-const TextInput = ({ label, placeholder, value, onChangeHandler, ...rest }) => {
+const TextInput: React.FC = ({
+  label,
+  placeholder,
+  value,
+  onChangeHandler,
+  ...rest
+}) => {
   return (
-    <Space block direction="vertical" style={styles.container} >
+    <Space block direction="vertical" style={styles.container}>
       <div style={styles.label}>{label}</div>
       <TextArea
         style={styles.textInput}
@@ -24,17 +29,17 @@ const styles = {
   container: {
     marginBottom: 15,
     paddingRight: 10,
-    marginRight: 10
+    marginRight: 10,
   },
   label: {
-    fontSize: '16px',
-    color: '#999'
+    fontSize: "16px",
+    color: "#999",
   },
   textInput: {
-    backgroundColor: '#000',
+    backgroundColor: "#000",
     padding: 10,
-    borderRadius: 5
-  }
-}
+    borderRadius: 5,
+  },
+};
 
 export default TextInput;

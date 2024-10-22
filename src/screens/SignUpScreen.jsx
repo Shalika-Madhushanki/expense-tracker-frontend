@@ -7,30 +7,20 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const SignUpScreen = () => {
     const [form] = Form.useForm();
-    const [error, setError] = useState('');
-    const location = useLocation();
+    const [message, setMessage] = useState({text : '', isError : false});
     const navigate = useNavigate();
-    const selectedPath = location.pathname.startsWith('/login') ? 'login' : 'signup';
 
     const handleClick = () => { }
 
     const handleOnFinish = async (values) => {
         try {
-            console.log('Login Form values', values);
-            const res = await signUpWithEmailAndPassword(values.username, values.password);
-            if (res?.status === 200) {
-                const data = await res.json(); // TODO: set logged in user and update token
-                form.resetFields();
-                navigate('/dashboard/home');
-            } else {
-                const data = await res.json();
-                setError(data?.errorMessage);
-            }
+            const data = await signUpWithEmailAndPassword(values.username, values.password);
+            form.resetFields();  
+            setMessage({ text: 'Account created successfully. Please login!', isError: false });
+            navigate('/login');
         } catch (error) {
-            console.log('err: ', error.message);
-            setError(error.message);
+            setMessage({ text: error.message || 'Sign-up failed. Please try again.', isError: true });
         }
-
     }
     const handleOnFinishFailed = ({ values, errorFields, outOfDate }) => { }
     return (
@@ -48,11 +38,11 @@ const SignUpScreen = () => {
                 footer={
                     <>
                         <span style={{
-                            color: 'red',
+                            color: message.isError ? 'red' : 'green',
                             paddingBottom: '3px',
                             marginBottom: '2px',
                             display: 'block'
-                        }}>{error}</span>
+                        }}>{message.text}</span>
                         <Button
                             disabled={form.getFieldError}
                             type="submit"

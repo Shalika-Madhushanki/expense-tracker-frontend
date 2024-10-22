@@ -12,25 +12,12 @@ const LoginScreen = () => {
 
     const handleOnFinish = async (values) => {
         try {
-            console.log('Login Form values', values);
-            const res = await callSignInWithEmailAndPassword(values.username, values.password);
-
-            if (res?.status === 200) {
-                const data = await res.json();
-                console.log('data: ', data);
-                form.resetFields();
-                navigate('/dashboard/home');
-            } else {
-                const data = await res.json();
-                console.log('data: ', data);
-                setError(data?.errorMessage);
-            }
-
+            const data = await callSignInWithEmailAndPassword(values.username, values.password);
+            localStorage.setItem("token", data?.token);
+            form.resetFields();  
+            navigate('/dashboard/home');
         } catch (error) {
-            console.log('err: ', error.message);
-
-            setError(error.message);
-
+            setError(error.message || 'Login failed. Please try again.');
         }
     }
     const handleOnFinishFailed = ({ values, errorFields, outOfDate }) => { }

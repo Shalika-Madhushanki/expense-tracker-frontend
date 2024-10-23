@@ -4,30 +4,44 @@ import React, { useState } from "react";
 import { signUpWithEmailAndPassword } from "../services/authenticationService";
 import { Link, useNavigate } from "react-router-dom";
 
+interface FormValues {
+  username: string;
+  password: string;
+  repeatPassword: string;
+}
+interface Message {
+  text: string;
+  isError: boolean;
+}
+
 const SignUpScreen: React.FC = () => {
   const [form] = Form.useForm();
-  const [message, setMessage] = useState({ text: "", isError: false });
+  const [message, setMessage] = useState<Message>({ text: "", isError: false });
   const navigate = useNavigate();
 
   const handleClick = () => {};
 
-  const handleOnFinish = async (values) => {
+  const handleOnFinish = async (values: FormValues): Promise<void> => {
     try {
-      const data = await signUpWithEmailAndPassword(
-        values.username,
-        values.password,
-      );
+      await signUpWithEmailAndPassword(values.username, values.password);
       form.resetFields();
       setMessage({
         text: "Account created successfully. Please login!",
         isError: false,
       });
       navigate("/login");
-    } catch (error) {
-      setMessage({
-        text: error.message || "Sign-up failed. Please try again.",
-        isError: true,
-      });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setMessage({
+          text: error.message,
+          isError: true,
+        });
+      } else {
+        setMessage({
+          text: "Sign-up failed. Please try again.",
+          isError: true,
+        });
+      }
     }
   };
   return (
@@ -41,6 +55,7 @@ const SignUpScreen: React.FC = () => {
         initialValues={{
           username: "",
           password: "",
+          repeatPassword: "",
         }}
         footer={
           <>
@@ -70,7 +85,7 @@ const SignUpScreen: React.FC = () => {
         onFinish={handleOnFinish}
         style={{
           width: "100%",
-          maxWidth: "400px", // Adjust max width as needed
+          maxWidth: "400px",
           padding: "20px",
         }}
       >

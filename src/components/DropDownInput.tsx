@@ -1,6 +1,19 @@
 import React from "react";
 
-const DropDownInput: React.FC = ({
+interface DropDownInputProps {
+  name: string;
+  label: string;
+  optionsList: OptionItem[];
+  value: string;
+  onChangeHandler: (value: OptionItem) => void;
+  className: string;
+}
+interface OptionItem {
+  name: string;
+  value: string;
+}
+
+const DropDownInput: React.FC<DropDownInputProps> = ({
   name,
   label,
   optionsList,

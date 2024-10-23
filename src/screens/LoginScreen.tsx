@@ -3,13 +3,19 @@ import { useState } from "react";
 
 import { callSignInWithEmailAndPassword } from "../services/authenticationService";
 import { Link, useNavigate } from "react-router-dom";
+import { FormInstance } from "antd-mobile/es/components/form";
+
+interface FormValues {
+  username: string;
+  password: string;
+}
 
 const LoginScreen: React.FC = () => {
-  const [form] = Form.useForm();
-  const [error, setError] = useState("");
+  const [form] = Form.useForm<FormInstance>();
+  const [error, setError] = useState<string>("");
   const navigate = useNavigate();
 
-  const handleOnFinish = async (values: object) => {
+  const handleOnFinish = async (values: FormValues): Promise<void> => {
     try {
       const data = await callSignInWithEmailAndPassword(
         values.username,
@@ -18,8 +24,12 @@ const LoginScreen: React.FC = () => {
       localStorage.setItem("token", data?.token);
       form.resetFields();
       navigate("/dashboard/home");
-    } catch (error) {
-      setError(error.message || "Login failed. Please try again.");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("Login failed. Please try again.");
+      }
     }
   };
   return (

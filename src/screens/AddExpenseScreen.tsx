@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
-import { paidByList, categoryList } from "../constants/sheet";
+import {
+  paidByList,
+  categoryList,
+  CategoryItem,
+  PaidByItem,
+} from "../constants/sheet";
 import {
   NumberInput,
   TextInput,
@@ -13,19 +18,20 @@ import { Dialog, Divider, DotLoading, Button, Space } from "antd-mobile";
 import { createExpense } from "../services/expenseService";
 import { useNavigate } from "react-router-dom";
 import { formatDateToDDMMYYYY } from "../utils/DateUtils";
+import { Expense } from "./HomeScreen";
 
 const AddExpenseScreen: React.FC = () => {
   const today = new Date();
   const navigate = useNavigate();
-  const [amount, setAmount] = useState(0);
-  const [description, setDescription] = useState("");
-  const [comments, setComments] = useState("");
-  const [category, setCategory] = useState(null);
-  const [paidBy, setPaidBy] = useState(null);
-  const [date, setDate] = useState(today);
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [isDialogVisible, setIsDialogVisible] = useState(false);
+  const [amount, setAmount] = useState<number>(0);
+  const [description, setDescription] = useState<string>("");
+  const [comments, setComments] = useState<string>("");
+  const [category, setCategory] = useState<CategoryItem | null>(null);
+  const [paidBy, setPaidBy] = useState<PaidByItem | null>(null);
+  const [date, setDate] = useState<Date>(today);
+  const [error, setError] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isDialogVisible, setIsDialogVisible] = useState<boolean>(false);
 
   const handleSubmit = () => {
     const result = {
@@ -39,7 +45,7 @@ const AddExpenseScreen: React.FC = () => {
     callApiFunction(result);
   };
 
-  const callApiFunction = async (data) => {
+  const callApiFunction = async (data: Expense) => {
     setError("");
     setIsLoading(true);
     setIsDialogVisible(true);
@@ -51,10 +57,14 @@ const AddExpenseScreen: React.FC = () => {
       resetFormData();
       setError("");
       setIsLoading(false);
-    } catch (error) {
+    } catch (error: unknown) {
       setIsLoading(false);
-      console.log("error message: ", error.message);
-      setError(error.message || "Error occurred creating the record.");
+      if (error instanceof Error) {
+        console.log("error message: ", error.message);
+        setError(error.message);
+      } else {
+        setError("Error occurred creating the record.");
+      }
     }
   };
 
@@ -67,22 +77,22 @@ const AddExpenseScreen: React.FC = () => {
     setDate(today);
   };
 
-  const handleAmountOnChange = (value) => {
+  const handleAmountOnChange = (value: number) => {
     setAmount(value);
   };
-  const handleDescriptionOnChange = (value) => {
+  const handleDescriptionOnChange = (value: string) => {
     setDescription(value);
   };
-  const handleCommentsOnChange = (value) => {
+  const handleCommentsOnChange = (value: string) => {
     setComments(value);
   };
-  const handleCategoryOnChange = (d) => {
-    setCategory(d);
+  const handleCategoryOnChange = (value: CategoryItem) => {
+    setCategory(value);
   };
-  const handlePaidByOnChange = (d) => {
-    setPaidBy(d);
+  const handlePaidByOnChange = (value: PaidByItem) => {
+    setPaidBy(value);
   };
-  const handleDateOnChange = (value) => {
+  const handleDateOnChange = (value: Date) => {
     setDate(value);
   };
   // const handleCancel = () => {
@@ -91,7 +101,7 @@ const AddExpenseScreen: React.FC = () => {
   const handleCloseDialog = () => {
     setIsDialogVisible(false);
     if (!error) {
-      navigate("/dashboard/home"); // Navigate only if there is no error
+      navigate("/dashboard/home");
     }
   };
   return (
@@ -135,7 +145,7 @@ const AddExpenseScreen: React.FC = () => {
         />
         <DatePicker onChangeHandler={handleDateOnChange} date={date} />
 
-        <span style={{ color: "red" }}>{error.message}</span>
+        <span style={{ color: "red" }}>{error}</span>
       </Space>
 
       <Button
@@ -152,7 +162,7 @@ const AddExpenseScreen: React.FC = () => {
         visible={isDialogVisible}
         content={
           isLoading ? (
-            <div style={styles.loadingContainer}>
+            <div style={styles.container}>
               <span>Record is being added</span>
               <DotLoading />
             </div>

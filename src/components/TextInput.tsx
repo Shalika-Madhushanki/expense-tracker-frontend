@@ -1,7 +1,13 @@
 import React from "react";
 import { Space, TextArea } from "antd-mobile";
 
-const TextInput: React.FC = ({
+interface TextInputProps {
+  label: string;
+  placeholder: string;
+  value: string;
+  onChangeHandler: (value: string) => void;
+}
+const TextInput: React.FC<TextInputProps> = ({
   label,
   placeholder,
   value,

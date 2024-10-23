@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge, TabBar } from "antd-mobile";
+import { TabBar } from "antd-mobile";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import {
   AppOutline,
@@ -8,6 +8,7 @@ import {
   PieOutline,
 } from "antd-mobile-icons";
 import HomeScreen from "./HomeScreen";
+import PieChartComponent from "../components/PieChartComponent";
 
 const DashBoardScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -22,14 +23,12 @@ const DashBoardScreen: React.FC = () => {
       key: "home",
       title: "Home",
       icon: <AppOutline />,
-      badge: Badge.dot,
       component: HomeScreen,
     },
     {
       key: "calendar",
       title: "Calendar",
       icon: <CalendarOutline />,
-      // badge: '5',
       component: Calendar,
     },
     // {
@@ -41,7 +40,6 @@ const DashBoardScreen: React.FC = () => {
       key: "statistics",
       title: "Statistics",
       icon: <PieOutline />,
-      badge: "99+",
       component: Statistics,
     },
     {
@@ -82,6 +80,10 @@ export function Profile() {
   return <div>Profile</div>;
 }
 export function Statistics() {
-  return <div>Stats</div>;
+  return (
+    <div>
+      <PieChartComponent />
+    </div>
+  );
 }
 export default DashBoardScreen;

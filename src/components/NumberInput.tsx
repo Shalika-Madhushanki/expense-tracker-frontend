@@ -1,7 +1,14 @@
 import React from "react";
 import { Space, Input } from "antd-mobile";
 
-const NumberInput: React.FC = ({
+interface NumberInputProps {
+  onChangeHandler: (value: number) => void;
+  label: string;
+  placeholder: string;
+  value: number;
+}
+
+const NumberInput: React.FC<NumberInputProps> = ({
   label,
   placeholder,
   value,
@@ -11,7 +18,7 @@ const NumberInput: React.FC = ({
   return (
     <Space direction="vertical" style={styles.container}>
       <div style={styles.label}>{label}</div>
-      <Space block direction="horiontal" align="center">
+      <Space block direction="horizontal" align="center">
         <p style={styles.icon}>€</p>
 
         <Input

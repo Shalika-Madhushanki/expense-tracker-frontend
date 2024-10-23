@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { AutoCompleteInput } from "../components";
+
 const AutoCompleteInputScreen: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [list, setList] = useState([]);

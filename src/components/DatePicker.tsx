@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Space, CalendarPicker, Button } from "antd-mobile";
 
-const DatePicker: React.FC = ({ date, onChangeHandler }) => {
+interface DatePickerProps {
+  date: Date;
+  onChangeHandler: (value: Date) => void;
+}
+const DatePicker: React.FC<DatePickerProps> = ({ date, onChangeHandler }) => {
   const [visible, setVisible] = useState(false);
 
   return (

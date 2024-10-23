@@ -7,6 +7,7 @@ import {
   UserOutline,
 } from "antd-mobile-icons";
 import { TabBar } from "antd-mobile";
+
 const MenuBar: React.FC = () => {
   const location = useLocation();
   const { pathname } = location;

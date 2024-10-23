@@ -1,5 +1,6 @@
 import React, { useCallback, useState, useRef, useEffect } from "react";
 import { Button, Modal, List, SearchBar } from "antd-mobile";
+import { CategoryItem } from "../constants/sheet";
 
 const EMPTY_ITEM = {
   text: "Not a valid type",
@@ -7,7 +8,15 @@ const EMPTY_ITEM = {
   disabled: true,
 };
 
-const SearchPicker: React.FC = ({
+interface SearchPickerProps {
+  data: CategoryItem;
+  items: CategoryItem[];
+  instruction: string;
+  label: string;
+  onSelect: (value: CategoryItem) => void;
+}
+
+const SearchPicker: React.FC<SearchPickerProps> = ({
   data,
   items,
   instruction,

@@ -5,12 +5,12 @@ import { Button, Grid, Image, List, ProgressCircle, Space } from "antd-mobile";
 import { useNavigate } from "react-router-dom";
 import { fetchExpenses } from "../services/expenseService";
 
-interface Expense {
+export interface Expense {
   id: number;
   amount: number;
   description: string;
-  category: string;
-  comments: string;
+  category: string | null;
+  comments: string | null;
   paidBy: string;
   date: string;
 }
@@ -33,27 +33,18 @@ const HomeScreen: React.FC = () => {
         if (data?.length) {
           setExpenseList(data);
         }
-      } catch (error: any) {
-        setError(error.message);
-        console.error("Error fetching expenses:", error);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setError(error.message);
+          console.error("Error fetching expenses:", error);
+        } else {
+          setError("Error occurred while fetching data");
+        }
       }
     };
     fetchData();
   }, []);
 
-  // useEffect(() => {
-  //     handleError();
-  // }, [error]);
-
-  // const handleError = () => {
-  //     if (error) {
-  //         Toast.show({
-  //             content: error,
-  //             duration: 3000, // duration in milliseconds
-  //             afterClose: () => setError(''), // clear the error after display
-  //         });
-  //     }
-  // };
   return (
     <>
       <div className="top-section">

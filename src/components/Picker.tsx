@@ -1,7 +1,21 @@
 import React, { useState } from "react";
 import { Button, ActionSheet } from "antd-mobile";
+import { PaidByItem } from "../constants/sheet";
 
-const Picker: React.FC = ({ data, items, instruction, label, onSelect }) => {
+interface PickerProps {
+  data: PaidByItem | null;
+  items: PaidByItem[];
+  instruction: string;
+  label: string;
+  onSelect: (value: PaidByItem) => void;
+}
+const Picker: React.FC<PickerProps> = ({
+  data,
+  items,
+  instruction,
+  label,
+  onSelect,
+}) => {
   const [visible, setVisible] = useState(false);
   return (
     <div style={styles.container}>

@@ -1,4 +1,10 @@
-export const categoryList = [
+export interface CategoryItem {
+  key: number;
+  text: string;
+  value: string;
+}
+
+export const categoryList: CategoryItem[] = [
   { key: 1, text: "Meals", value: "Meals" },
   { key: 2, text: "Groceries", value: "Groceries" },
   { key: 3, text: "Medicine", value: "Medicine" },
@@ -18,7 +24,13 @@ export const categoryList = [
   { key: 17, text: "Savings", value: "Savings" },
 ];
 
-export const paidByList = [
+export interface PaidByItem {
+  key: number;
+  text: string;
+  value: string;
+}
+
+export const paidByList: PaidByItem[] = [
   { key: 1, text: "Shalika", value: "Shalika" },
   { key: 2, text: "Malith", value: "Malith" },
   { key: 3, text: "Savings", value: "Savings" },

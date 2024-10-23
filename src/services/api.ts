@@ -1,6 +1,6 @@
 const API_BASE_URL = "http://localhost:8080/api";
 
-const handleApiResponse = async (response) => {
+const handleApiResponse = async (response: any) => {
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({})); // Catch JSON parsing errors
     const errorMessage = errorData?.errorMessage || "Something went wrong";
@@ -21,7 +21,7 @@ const handleApiResponse = async (response) => {
 export const apiCall = async (
   endpoint: string,
   method: string,
-  body = null,
+  body: any = null,
   headers = {},
 ) => {
   const config = {

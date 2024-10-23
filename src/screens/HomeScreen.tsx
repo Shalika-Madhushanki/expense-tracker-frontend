@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Grid, Image, List, ProgressCircle, Space } from "antd-mobile";
 import { useNavigate } from "react-router-dom";
 import { fetchExpenses } from "../services/expenseService";
+import { isTokenExpired } from "../utils/JwtUtils";
 
 export interface Expense {
   id: number;
@@ -27,7 +28,13 @@ const HomeScreen: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       setError("");
-
+      const token = localStorage.getItem("token");
+      if (token && isTokenExpired(token)) {
+        navigate("/login");
+        return Promise.reject(
+          new Error("Token expired, redirecting to login."),
+        );
+      }
       try {
         const data = await fetchExpenses();
         if (data?.length) {
@@ -49,6 +56,7 @@ const HomeScreen: React.FC = () => {
     <>
       <div className="top-section">
         <Space style={{ "--gap": "24px" }}>
+        {/* <div>Expense Overview</div> */}
           <ProgressCircle
             percent={(totalAmount / 5000) * 100}
             style={{

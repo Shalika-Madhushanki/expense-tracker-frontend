@@ -1,8 +1,9 @@
+import { Expense } from "../screens/HomeScreen";
 import { apiCall } from "./api";
 
 const EXPENSE_ENDPOINT = "/expenses";
 
-export const createExpense = (data) => {
+export const createExpense = (data: Expense) => {
   const token = localStorage.getItem("token");
 
   return apiCall(EXPENSE_ENDPOINT, "POST", data, {

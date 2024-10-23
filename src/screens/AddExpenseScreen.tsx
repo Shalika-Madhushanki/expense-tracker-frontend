@@ -19,6 +19,7 @@ import { createExpense } from "../services/expenseService";
 import { useNavigate } from "react-router-dom";
 import { formatDateToDDMMYYYY } from "../utils/DateUtils";
 import { Expense } from "./HomeScreen";
+import { isTokenExpired } from "../utils/JwtUtils";
 
 const AddExpenseScreen: React.FC = () => {
   const today = new Date();
@@ -52,6 +53,13 @@ const AddExpenseScreen: React.FC = () => {
     const inputDate = new Date(data.date);
     const formattedDay = formatDateToDDMMYYYY(inputDate);
     data.date = formattedDay;
+
+    const token = localStorage.getItem("token");
+    if (token && isTokenExpired(token)) {
+      navigate("/login");
+      return Promise.reject(new Error("Token expired, redirecting to login."));
+    }
+
     try {
       await createExpense(data);
       resetFormData();

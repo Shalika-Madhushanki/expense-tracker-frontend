@@ -6,9 +6,11 @@ import {
   CalendarOutline,
   UserOutline,
   PieOutline,
+  AddCircleOutline,
 } from "antd-mobile-icons";
 import HomeScreen from "./HomeScreen";
 import PieChartComponent from "../components/PieChartComponent";
+import AddExpenseScreen from "./AddExpenseScreen";
 
 const DashBoardScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -30,11 +32,21 @@ const DashBoardScreen: React.FC = () => {
       icon: <CalendarOutline />,
       component: Calendar,
     },
-    // {
-    //     key:'add',
-    //     title : '',
-    //     icon: <AddCircleOutline fontSize={35} />
-    // },
+    {
+      key: "add",
+      title: "",
+      icon: (
+        <div
+          style={{
+            position: "relative",
+            top: "-10px",
+          }}
+        >
+          <AddCircleOutline fontSize={40} />
+        </div>
+      ),
+      component: AddExpenseScreen,
+    },
     {
       key: "statistics",
       title: "Statistics",

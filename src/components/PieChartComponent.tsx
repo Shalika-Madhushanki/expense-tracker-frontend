@@ -2,12 +2,14 @@ import React from "react";
 import { PieChart, Pie, Tooltip, Cell, Sector } from "recharts";
 
 const COLORS = [
-  "url(#gradientBlue)",
-  "url(#gradientRed)",
-  "url(#gradientGreen)",
-  "url(#gradientPurple)",
-  "url(#gradientYellow)",
-  "url(#gradientPink)",
+  "#624E88",
+  "#8967B3",
+  "#CB80AB",
+  "#E6D9A2",
+  "#A1D6B2",
+  "#CEDF9F",
+  "#F1F3C2",
+  "#C96868",
 ];
 
 export interface PieChartDataItem {
@@ -20,32 +22,6 @@ interface PieChartComponentProps {
 const PieChartComponent: React.FC<PieChartComponentProps> = ({ data = [] }) => {
   return (
     <PieChart width={390} height={390}>
-      <defs>
-        <linearGradient id="gradientBlue" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#4A90E2" />
-          <stop offset="100%" stopColor="#357ABD" />
-        </linearGradient>
-        <linearGradient id="gradientRed" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#F55A4E" />
-          <stop offset="100%" stopColor="#D63D2E" />
-        </linearGradient>
-        <linearGradient id="gradientGreen" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#3BB273" />
-          <stop offset="100%" stopColor="#2B8543" />
-        </linearGradient>
-        <linearGradient id="gradientPurple" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#BE79DF" />
-          <stop offset="100%" stopColor="#A25DCD" />
-        </linearGradient>
-        <linearGradient id="gradientYellow" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#e5e231" />
-          <stop offset="100%" stopColor="#e2ad26" />
-        </linearGradient>
-        <linearGradient id="gradientPink" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#e226dc" />
-          <stop offset="100%" stopColor="#e593e2" />
-        </linearGradient>
-      </defs>
       <Pie
         data={data}
         cx={195}

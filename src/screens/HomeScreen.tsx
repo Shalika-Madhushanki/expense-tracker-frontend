@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
-
-// import image from './../assets/grocery.png'
-import { Button, Grid, Image, List, ProgressCircle, Space } from "antd-mobile";
+import { Button, Grid, Image, List, Space } from "antd-mobile";
 import { useNavigate } from "react-router-dom";
+
 import { fetchExpenses } from "../services/expenseService";
 import { isTokenExpired } from "../utils/JwtUtils";
 import PieChartComponent, {
   PieChartDataItem,
 } from "../components/PieChartComponent";
+
+import image from "./../assets/grocery.jpg";
 
 export interface Expense {
   id: number;
@@ -116,13 +117,12 @@ const HomeScreen: React.FC = () => {
           {expenseList.map((record: Expense, index) => (
             <List.Item
               onClick={() => {
-                console.log("here");
                 navigate(`/expenses/view/${record.id}`);
               }}
               key={index}
               prefix={
                 <Image
-                  src={"image"}
+                  src={image}
                   style={{ borderRadius: 20 }}
                   fit="cover"
                   width={40}

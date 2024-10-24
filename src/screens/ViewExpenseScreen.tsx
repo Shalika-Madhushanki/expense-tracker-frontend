@@ -66,9 +66,7 @@ const ViewExpenseScreen: React.FC = () => {
               Comments
             </List.Item>
             <List.Item extra={expense.paidBy || "Unknown"}>Paid By</List.Item>
-            <List.Item extra={new Date(expense.date).toLocaleDateString()}>
-              Date
-            </List.Item>
+            <List.Item extra={expense.date}>Date</List.Item>
           </List>
         </Space>
       </Card>

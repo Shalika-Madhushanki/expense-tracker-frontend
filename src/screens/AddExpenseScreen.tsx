@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-
-import {
-  paidByList,
-  categoryList,
-  CategoryItem,
-  PaidByItem,
-} from "../constants/sheet";
+import { useNavigate } from "react-router-dom";
 import {
   NumberInput,
   TextInput,
@@ -16,10 +10,15 @@ import {
 import { Dialog, Divider, DotLoading, Button, Space } from "antd-mobile";
 
 import { createExpense } from "../services/expenseService";
-import { useNavigate } from "react-router-dom";
 import { formatDateToDDMMYYYY } from "../utils/DateUtils";
 import { Expense } from "./HomeScreen";
 import { isTokenExpired } from "../utils/JwtUtils";
+import {
+  paidByList,
+  categoryList,
+  CategoryItem,
+  PaidByItem,
+} from "../constants/sheet";
 
 const AddExpenseScreen: React.FC = () => {
   const today = new Date();
@@ -68,7 +67,7 @@ const AddExpenseScreen: React.FC = () => {
     } catch (error: unknown) {
       setIsLoading(false);
       if (error instanceof Error) {
-        console.log("error message: ", error.message);
+        console.error("error message: ", error.message);
         setError(error.message);
       } else {
         setError("Error occurred creating the record.");

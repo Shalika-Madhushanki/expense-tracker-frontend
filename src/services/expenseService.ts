@@ -13,7 +13,6 @@ export const createExpense = (data: Expense) => {
 };
 
 export const fetchExpenses = () => {
-  console.log("Fetching expenses");
   const token = localStorage.getItem("token");
 
   return apiCall(
@@ -27,7 +26,6 @@ export const fetchExpenses = () => {
 };
 
 export const fetchExpenseRecord = (id: number) => {
-  console.log("Fetching expenses");
   const token = localStorage.getItem("token");
 
   return apiCall(

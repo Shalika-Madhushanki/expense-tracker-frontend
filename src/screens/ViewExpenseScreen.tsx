@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Expense } from "./HomeScreen";
-import { Card, List, Space } from "antd-mobile";
-import { fetchExpenseRecord } from "../services/expenseService";
 import { useNavigate, useParams } from "react-router-dom";
+import { LeftOutline } from "antd-mobile-icons";
+import { Card, List, Space } from "antd-mobile";
+
+import { Expense } from "./HomeScreen";
+import { fetchExpenseRecord } from "../services/expenseService";
 import { isTokenExpired } from "../utils/JwtUtils";
 
 const ViewExpenseScreen: React.FC = () => {
@@ -45,32 +47,41 @@ const ViewExpenseScreen: React.FC = () => {
     fetchExpenseData();
   }, []);
   return (
-    <div style={{ padding: "16px" }}>
-      <Card>
-        <Space direction="vertical" block>
-          <List header="Expense Details">
-            <List.Item
-              extra={
-                <span style={{ fontWeight: "bold", fontSize: "16px" }}>
-                  {expense.amount} €
-                </span>
-              }
-            >
-              Amount
-            </List.Item>
-            <List.Item extra={expense.description || "N/A"}>
-              Description
-            </List.Item>
-            <List.Item extra={expense.category || "N/A"}>Category</List.Item>
-            <List.Item extra={expense.comments || "No comments"}>
-              Comments
-            </List.Item>
-            <List.Item extra={expense.paidBy || "Unknown"}>Paid By</List.Item>
-            <List.Item extra={expense.date}>Date</List.Item>
-          </List>
-        </Space>
-      </Card>
-    </div>
+    <>
+      <LeftOutline
+        onClick={() => {
+          navigate("/dashboard/home");
+        }}
+        fontSize={18}
+        style={{ paddingLeft: "20px", marginTop: "20px" }}
+      />
+      <div style={{ padding: "16px" }}>
+        <Card>
+          <Space direction="vertical" block>
+            <List header={<>Expense Details</>}>
+              <List.Item
+                extra={
+                  <span style={{ fontWeight: "bold", fontSize: "16px" }}>
+                    {expense.amount} €
+                  </span>
+                }
+              >
+                Amount
+              </List.Item>
+              <List.Item extra={expense.description || "N/A"}>
+                Description
+              </List.Item>
+              <List.Item extra={expense.category || "N/A"}>Category</List.Item>
+              <List.Item extra={expense.comments || "No comments"}>
+                Comments
+              </List.Item>
+              <List.Item extra={expense.paidBy || "Unknown"}>Paid By</List.Item>
+              <List.Item extra={expense.date}>Date</List.Item>
+            </List>
+          </Space>
+        </Card>
+      </div>
+    </>
   );
 };
 

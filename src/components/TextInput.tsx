@@ -24,7 +24,6 @@ const TextInput: React.FC<TextInputProps> = ({
         onChange={onChangeHandler}
         autoSize
         rows={1}
-        type="text"
         {...rest}
       />
     </Space>

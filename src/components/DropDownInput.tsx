@@ -8,6 +8,7 @@ interface DropDownInputProps {
   onChangeHandler: (value: OptionItem) => void;
   className: string;
 }
+
 interface OptionItem {
   name: string;
   value: string;

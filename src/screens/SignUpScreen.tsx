@@ -1,8 +1,8 @@
-import { Button, Form, Input } from "antd-mobile";
 import React, { useState } from "react";
+import { Button, Form, Input } from "antd-mobile";
+import { Link, useNavigate } from "react-router-dom";
 
 import { signUpWithEmailAndPassword } from "../services/authenticationService";
-import { Link, useNavigate } from "react-router-dom";
 
 interface FormValues {
   username: string;
@@ -19,7 +19,7 @@ const SignUpScreen: React.FC = () => {
   const [message, setMessage] = useState<Message>({ text: "", isError: false });
   const navigate = useNavigate();
 
-  const handleClick = () => {};
+  const handleClick = () => { };
 
   const handleOnFinish = async (values: FormValues): Promise<void> => {
     try {

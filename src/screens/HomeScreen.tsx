@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Button, Grid, Image, List, Space } from "antd-mobile";
+import { Grid, Image, List, Space } from "antd-mobile";
 import { useNavigate } from "react-router-dom";
 
 import { fetchExpenses } from "../services/expenseService";
@@ -96,16 +96,7 @@ const HomeScreen: React.FC = () => {
                 alignItems: "center",
               }}
             >
-              <span>History</span>
-              <Button
-                onClick={() => {
-                  navigate("/expenses/add");
-                }}
-                color="primary"
-                size="small"
-              >
-                Add Expense
-              </Button>
+              <span style={{ fontSize: "18px" }}>History</span>
             </div>
           }
         >
@@ -115,6 +106,19 @@ const HomeScreen: React.FC = () => {
             >
               {error}
             </div>
+          )}
+          {expenseList?.length == 0 ? (
+            <div
+              style={{
+                color: "#808080",
+                textAlign: "center",
+                margin: "10px 0",
+              }}
+            >
+              No Data Found
+            </div>
+          ) : (
+            ""
           )}
           {expenseList.map((record: Expense, index) => (
             <List.Item

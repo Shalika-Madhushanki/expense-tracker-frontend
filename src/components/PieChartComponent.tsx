@@ -20,15 +20,17 @@ interface PieChartComponentProps {
   data: PieChartDataItem[];
 }
 const PieChartComponent: React.FC<PieChartComponentProps> = ({ data = [] }) => {
+  const totalValue = data.reduce((sum, item) => sum + item.value, 0);
+
   return (
     <PieChart width={390} height={390}>
       <Pie
         data={data}
         cx={195}
         cy={195}
-        // label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+        label={({ name, percent }) => `${(percent * 100).toFixed(0)}%`}
         innerRadius={50}
-        outerRadius={80}
+        outerRadius={100}
         fill="#8884d8"
         paddingAngle={5}
         dataKey="value"
@@ -39,7 +41,7 @@ const PieChartComponent: React.FC<PieChartComponentProps> = ({ data = [] }) => {
           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
         ))}
       </Pie>
-      <Tooltip />
+      <Tooltip content={<CustomTooltip />} />
     </PieChart>
   );
 };
@@ -49,8 +51,8 @@ const renderActiveShape = (props) => {
   const { cx, cy, innerRadius, outerRadius, fill, value } = props;
   return (
     <g>
-      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill} fontSize={24}>
-        {value}
+      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill} fontSize={12}>
+        {value}€
       </text>
       <Sector
         cx={cx}
@@ -71,14 +73,14 @@ const CustomTooltip = ({ active, payload }) => {
     return (
       <div
         style={{
-          backgroundColor: "#333", // Custom background color
-          color: "#fff", // Custom text color
+          backgroundColor: "#333",
+          color: "#fff",
           padding: "10px",
           borderRadius: "5px",
           fontSize: "14px",
         }}
       >
-        <p>{`${payload[0].name} : ${payload[0].value}`}</p>
+        <p>{`${payload[0].name} : ${payload[0].value}€`}</p>
       </div>
     );
   }

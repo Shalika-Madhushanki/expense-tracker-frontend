@@ -3,7 +3,6 @@ import TextInput from "./TextInput";
 import Picker from "./Picker";
 import DropDownInput from "./DropDownInput";
 import DatePicker from "./DatePicker";
-import AutoCompleteInput from "./AutoCompleteInput";
 import SearchPicker from "./SearchPicker";
 
 export {
@@ -12,6 +11,5 @@ export {
   Picker,
   DropDownInput,
   DatePicker,
-  AutoCompleteInput,
   SearchPicker,
 };

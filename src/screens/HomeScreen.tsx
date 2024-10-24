@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 // import image from './../assets/grocery.png'
 import { Button, Grid, Image, List, ProgressCircle, Space } from "antd-mobile";
 import { useNavigate } from "react-router-dom";
 import { fetchExpenses } from "../services/expenseService";
 import { isTokenExpired } from "../utils/JwtUtils";
+import PieChartComponent, {
+  PieChartDataItem,
+} from "../components/PieChartComponent";
 
 export interface Expense {
   id: number;
@@ -19,11 +22,27 @@ export interface Expense {
 const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
   const [expenseList, setExpenseList] = useState<Expense[]>([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
+  const [chartData, setChartData] = useState<PieChartDataItem[]>([]);
 
-  const totalAmount = expenseList
-    .map((item) => Number(item.amount))
-    .reduce((acc, curr) => acc + curr, 0);
+  const generateCategoryByTotalList = useCallback(() => {
+    const expenseAmountByCategory: { [category: string]: number } = {};
+
+    expenseList.map((expense: Expense) => {
+      if (!expenseAmountByCategory[expense.category]) {
+        expenseAmountByCategory[expense.category] = 0;
+      }
+      expenseAmountByCategory[expense.category] += expense.amount;
+    });
+    const expenseByCategoryArray = Object.keys(expenseAmountByCategory).map(
+      (category) => ({
+        name: category,
+        value: expenseAmountByCategory[category],
+      }),
+    );
+    console.log("array:", expenseByCategoryArray);
+    setChartData(expenseByCategoryArray);
+  }, [expenseList]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,26 +69,18 @@ const HomeScreen: React.FC = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [navigate]);
+
+  useEffect(() => {
+    generateCategoryByTotalList();
+  }, [expenseList, generateCategoryByTotalList]);
 
   return (
     <>
       <div className="top-section">
         <Space style={{ "--gap": "24px" }}>
-        {/* <div>Expense Overview</div> */}
-          <ProgressCircle
-            percent={(totalAmount / 5000) * 100}
-            style={{
-              "--size": "200px",
-              "--track-width": "4px",
-            }}
-          >
-            <div> You have spend </div>
-            <div style={{ fontSize: "20px", lineHeight: "26px" }}>
-              {totalAmount} €
-            </div>
-            <div>this month</div>
-          </ProgressCircle>
+          {/* <div>Expense Overview</div> */}
+          <PieChartComponent data={chartData} />
         </Space>
       </div>
       <div className="bottom-section">
@@ -104,6 +115,10 @@ const HomeScreen: React.FC = () => {
           )}
           {expenseList.map((record: Expense, index) => (
             <List.Item
+              onClick={() => {
+                console.log("here");
+                navigate(`/expenses/view/${record.id}`);
+              }}
               key={index}
               prefix={
                 <Image

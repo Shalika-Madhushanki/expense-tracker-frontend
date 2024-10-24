@@ -7,8 +7,7 @@ import { isTokenExpired } from "../utils/JwtUtils";
 import PieChartComponent, {
   PieChartDataItem,
 } from "../components/PieChartComponent";
-
-import image from "./../assets/grocery.jpg";
+import { categoryIconsMap } from "../constants/sheet";
 
 export interface Expense {
   id: number;
@@ -41,7 +40,6 @@ const HomeScreen: React.FC = () => {
         value: expenseAmountByCategory[category],
       }),
     );
-    console.log("array:", expenseByCategoryArray);
     setChartData(expenseByCategoryArray);
   }, [expenseList]);
 
@@ -75,6 +73,10 @@ const HomeScreen: React.FC = () => {
   useEffect(() => {
     generateCategoryByTotalList();
   }, [expenseList, generateCategoryByTotalList]);
+
+  const getCategoryIcon = (category: string): string | undefined => {
+    return categoryIconsMap.get(category);
+  };
 
   return (
     <>
@@ -122,8 +124,8 @@ const HomeScreen: React.FC = () => {
               key={index}
               prefix={
                 <Image
-                  src={image}
-                  style={{ borderRadius: 20 }}
+                  src={getCategoryIcon(record.category)}
+                  style={{ borderRadius: 20, backgroundColor: "white" }}
                   fit="cover"
                   width={40}
                   height={40}

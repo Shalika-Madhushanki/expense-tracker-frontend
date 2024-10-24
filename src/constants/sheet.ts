@@ -1,3 +1,21 @@
+import bill from "./../assets/bill.png";
+import transport from "./../assets/train.png";
+import entertainment from "./../assets/cinema.png";
+import grocery from "./../assets/grocery.png";
+import meal from "./../assets/dinner.png";
+import medicine from "./../assets/medicine.png";
+import personalized from "./../assets/personalized.png";
+import tourism from "./../assets/tourism.png";
+import fashion from "./../assets/fashion.png";
+import subscription from "./../assets/subscription-model.png";
+import defaultImage from "./../assets/default-image.png";
+import furniture from "./../assets/sofa.png";
+import charity from "./../assets/generous.png";
+import savings from "./../assets/piggy-bank.png";
+import presents from "./../assets/gift-box.png";
+import electronics from "./../assets/recycling.png";
+import apartment from "./../assets/apartment.png";
+
 export interface CategoryItem {
   key: number;
   text: string;
@@ -37,3 +55,23 @@ export const paidByList: PaidByItem[] = [
   { key: 4, text: "Shalika Personal", value: "S Personal" },
   { key: 5, text: "Malith Personal", value: "M Personal" },
 ];
+
+export const categoryIconsMap: Map<string, string> = new Map([
+  ["Meals", meal],
+  ["Groceries", grocery],
+  ["Medicine", medicine],
+  ["Bills", bill],
+  ["Entertainment", entertainment],
+  ["Transport", transport],
+  ["Tours", tourism],
+  ["Personal Care", personalized],
+  ["Clothes", fashion],
+  ["Subscriptions", subscription],
+  ["Electronics", electronics],
+  ["Furniture", furniture],
+  ["Presents", presents],
+  ["Charity", charity],
+  ["Apartment", apartment],
+  ["Savings", savings],
+  ["", defaultImage],
+]);

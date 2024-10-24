@@ -7,7 +7,8 @@ import LoginScreen from "./screens/LoginScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import DashBoardScreen from "./screens/DashBoardScreen";
 import AddExpenseScreen from "./screens/AddExpenseScreen";
-const App = () => {
+import ViewExpenseScreen from "./screens/ViewExpenseScreen";
+const App: React.FC = () => {
   return (
     <ConfigProvider locale={enUS}>
       <BrowserRouter>
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/dashboard/*" element={<DashBoardScreen />} />
           <Route path="/signup" element={<SignUpScreen />} />
           <Route path="/expenses/add" element={<AddExpenseScreen />} />
+          <Route path="/expenses/view/:id" element={<ViewExpenseScreen />} />
         </Routes>
       </BrowserRouter>
     </ConfigProvider>

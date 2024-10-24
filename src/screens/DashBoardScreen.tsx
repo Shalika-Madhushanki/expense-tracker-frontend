@@ -14,7 +14,6 @@ const DashBoardScreen: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
-
   const setRouteActive = (value: string) => {
     navigate(value);
   };
@@ -61,7 +60,7 @@ const DashBoardScreen: React.FC = () => {
       </div>
       <div className="tab-bar">
         <TabBar
-          activeKey={pathname}
+          activeKey={pathname.split("/")[2]}
           onChange={(value) => setRouteActive(value)}
         >
           {tabs.map((item) => (
@@ -82,7 +81,7 @@ export function Profile() {
 export function Statistics() {
   return (
     <div>
-      <PieChartComponent />
+      <PieChartComponent data={[]} />
     </div>
   );
 }

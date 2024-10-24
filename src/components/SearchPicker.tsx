@@ -42,11 +42,9 @@ const SearchPicker: React.FC<SearchPickerProps> = ({
         ref={searchRef}
         placeholder=""
         onChange={(query) => {
-          console.log(query);
           const res = items.filter((item) =>
             item.value.toLowerCase().startsWith(query.toLowerCase()),
           );
-          console.log("res: ", res);
           setFilterredItems(res?.length > 0 ? res : [EMPTY_ITEM]);
         }}
         style={{ "--height": "40px" }}

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { LeftOutline } from "antd-mobile-icons";
 import { Card, List, Space } from "antd-mobile";
 
 import { Expense } from "./HomeScreen";
 import { fetchExpenseRecord } from "../services/expenseService";
 import { isTokenExpired } from "../utils/JwtUtils";
+import PageHeader from "../components/PageHeader";
 
 const ViewExpenseScreen: React.FC = () => {
   const { id } = useParams();
@@ -48,17 +48,17 @@ const ViewExpenseScreen: React.FC = () => {
   }, []);
   return (
     <>
-      <LeftOutline
-        onClick={() => {
+      <PageHeader
+        headerText="Expense Details"
+        onClickHandler={() => {
           navigate("/dashboard/home");
         }}
-        fontSize={18}
-        style={{ paddingLeft: "20px", marginTop: "20px" }}
       />
       <div style={{ padding: "16px" }}>
         <Card>
           <Space direction="vertical" block>
-            <List header={<>Expense Details</>}>
+
+            <List>
               <List.Item
                 extra={
                   <span style={{ fontWeight: "bold", fontSize: "16px" }}>
@@ -75,7 +75,7 @@ const ViewExpenseScreen: React.FC = () => {
               <List.Item extra={expense.comments || "No comments"}>
                 Comments
               </List.Item>
-              <List.Item extra={expense.paidBy || "Unknown"}>Paid By</List.Item>
+              <List.Item extra={expense.paidBy || "Unknown"}>Who's paid?</List.Item>
               <List.Item extra={expense.date}>Date</List.Item>
             </List>
           </Space>

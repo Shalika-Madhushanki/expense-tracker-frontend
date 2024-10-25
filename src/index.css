@@ -51,39 +51,92 @@ html, body, #root {
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serifx 
 }
 
-.dashboard-container {
-  height: 100vh; /* Full viewport height */
-  display: flex;
-  flex-direction: column; /* Stack items vertically */
-  overflow: hidden; 
+  .dashboard-container {
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    overflow: hidden; 
 
-}
+  }
 
-.content {
-  flex: 1; /* Takes up the remaining space */
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 50px); /* Calculate height by subtracting the TabBar height */
-}
+  .content {
+    flex: 1; /* Takes up the remaining space */
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 50px); /* Calculate height by subtracting the TabBar height */
+  }
 
-.tab-bar {
-  flex-shrink: 0;
-  height: 50px; /* Explicit height for TabBar */}
+  .tab-bar {
+    flex-shrink: 0;
+    /* height: 50px; /* Explicit height for TabBar */} */
 
-.top-section {
-  display: flex;
-  padding: 0; /* Remove padding for more space */
-  flex: 1; /* Top section takes up 50% of the available space */
-  border-bottom: 1px solid #ccc;
-  overflow-y: auto; /* Allow scrolling if content exceeds available space */
-  justify-content: center; /* Vertical centering */
-  align-items: center; /* Horizontal centering */ 
-}
+  /* .top-section {
+    display: flex;
+    padding: 0; 
+    flex: 1; 
+    overflow-y: auto; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column;
 
-.bottom-section {
-  flex: 1; /* Bottom section takes up 50% of the available space */
-  overflow-y: auto; /* Allow scrolling if list gets too long */
-  padding: 0;
+  } */
+  .top-section {
+    display: flex;
+    flex: 1; /* Top section takes up half of the remaining space */
+    justify-content: center; /* Horizontally center content */
+    align-items: center; /* Vertically center content */
+    flex-direction: column;
+    padding: 0; /* Remove padding */
+    background-color: #f7f7f7; /* Adjust background if needed */
+  }
 
-}
+  .page-header{
+    /* flex: 1; */
+    height: 50px; 
+    flex-shrink: 0;
+    display: flex; 
+    text-align: center;
+    font-family: Verdana, sans-serif;
+    justify-content:space-between
+  }
+  .chart-section {
+    flex: 1;
+    display: flex; 
+    justify-content: center; /* Center the PieChart horizontally */
+    align-items: center; /* Center the PieChart vertically */
+    width: 100%; /* Full width */
+    max-height: 100%; /* Restrict maximum height */
+  }
+  .bottom-section {
+    flex: 1; /* Bottom section takes up 50% of the available space */
+    overflow-y: auto; /* Allow scrolling if list gets too long */
+    padding: 0;
+  }
 
+  .back-action{
+    /* flex: 1;  */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    float: left;
+  }
+
+  .header-text{
+    flex: 3; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .some-action{
+    flex: 1; 
+
+  }
+  .icon{
+    background-color: #343131;
+    padding: 8px;
+    border-radius: 15%;
+  }
+/* * {
+  border: 1px solid #bbb;
+} */

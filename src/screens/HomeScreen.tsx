@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Grid, Image, List, Space } from "antd-mobile";
+import { Grid, Image, List } from "antd-mobile";
 import { useNavigate } from "react-router-dom";
+import { LeftOutline } from "antd-mobile-icons";
 
 import { fetchExpenses } from "../services/expenseService";
 import { isTokenExpired } from "../utils/JwtUtils";
@@ -81,10 +82,18 @@ const HomeScreen: React.FC = () => {
   return (
     <>
       <div className="top-section">
-        <Space style={{ "--gap": "24px" }}>
-          {/* <div>Expense Overview</div> */}
+        <div className="top-section-child page-header">
+          <div className="back-action">
+            <LeftOutline className="icon" />
+          </div>
+          <div className="header-text">
+            <h2>Expense Dashboard</h2>
+          </div>
+          <div className="some-action"></div>
+        </div>
+        <div className="top-section-child chart-section">
           <PieChartComponent data={chartData} />
-        </Space>
+        </div>
       </div>
       <div className="bottom-section">
         <List

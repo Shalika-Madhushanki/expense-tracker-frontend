@@ -1,5 +1,12 @@
 import React from "react";
-import { PieChart, Pie, Tooltip, Cell, Sector } from "recharts";
+import {
+  PieChart,
+  Pie,
+  Tooltip,
+  Cell,
+  Sector,
+  ResponsiveContainer,
+} from "recharts";
 
 const COLORS = [
   "#624E88",
@@ -19,30 +26,37 @@ export interface PieChartDataItem {
 interface PieChartComponentProps {
   data: PieChartDataItem[];
 }
-const PieChartComponent: React.FC<PieChartComponentProps> = ({ data = [] }) => {
+const PieChartComponent: React.FC<PieChartComponentProps> = ({ data  }) => {
   const totalValue = data.reduce((sum, item) => sum + item.value, 0);
-
+  console.log(data);
   return (
-    <PieChart width={390} height={390}>
-      <Pie
-        data={data}
-        cx={195}
-        cy={195}
-        label={({ name, percent }) => `${(percent * 100).toFixed(0)}%`}
-        innerRadius={50}
-        outerRadius={100}
-        fill="#8884d8"
-        paddingAngle={5}
-        dataKey="value"
-        stroke="#000"
-        activeShape={renderActiveShape}
-      >
-        {data.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-        ))}
-      </Pie>
-      <Tooltip content={<CustomTooltip />} />
-    </PieChart>
+    <div style={{ width: "100%", height: "100%" }}>
+      <ResponsiveContainer>
+        <PieChart>
+          <Pie
+            data={data}
+            cx="50%"
+            cy="50%"
+            label={({ name, percent }) => `${(percent * 100).toFixed(0)}%`}
+            innerRadius={60}
+            outerRadius={80}
+            fill="#8884d8"
+            paddingAngle={5}
+            dataKey="value"
+            stroke="#000"
+            activeShape={renderActiveShape}
+          >
+            {data.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
+          </Pie>
+          <Tooltip content={<CustomTooltip />} />
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 

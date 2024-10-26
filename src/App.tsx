@@ -18,6 +18,7 @@ const App: React.FC = () => {
           <Route path="/signup" element={<SignUpScreen />} />
           <Route path="/expenses/add" element={<AddExpenseScreen />} />
           <Route path="/expenses/view/:id" element={<ViewExpenseScreen />} />
+          <Route path="/expenses/edit/:id" element={<AddExpenseScreen />} />
         </Routes>
       </BrowserRouter>
     </ConfigProvider>

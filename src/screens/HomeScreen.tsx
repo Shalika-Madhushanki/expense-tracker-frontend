@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Grid, Image, List } from "antd-mobile";
+import { Grid, Image, List, Space } from "antd-mobile";
 import { useNavigate } from "react-router-dom";
 import { LeftOutline } from "antd-mobile-icons";
 
@@ -14,8 +14,8 @@ export interface Expense {
   id: number;
   amount: number;
   description: string;
-  category: string | null;
-  comments: string | null;
+  category: string;
+  comments: string;
   paidBy: string;
   date: string;
 }
@@ -84,7 +84,12 @@ const HomeScreen: React.FC = () => {
       <div className="top-section">
         <div className="top-section-child page-header">
           <div className="back-action">
-            <LeftOutline className="icon" />
+            <LeftOutline
+              onClick={() => {
+                navigate("/login");
+              }}
+              className="icon"
+            />
           </div>
           <div className="header-text">
             <h2>Expense Dashboard</h2>

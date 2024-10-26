@@ -22,6 +22,10 @@ export interface CategoryItem {
   value: string;
 }
 
+export const findCategoryByText = (text: string): CategoryItem | undefined => {
+  return categoryList.find((item) => item.text === text);
+};
+
 export const categoryList: CategoryItem[] = [
   { key: 1, text: "Meals", value: "Meals" },
   { key: 2, text: "Groceries", value: "Groceries" },
@@ -47,6 +51,10 @@ export interface PaidByItem {
   text: string;
   value: string;
 }
+
+export const findPaidByByText = (text: string): PaidByItem | undefined => {
+  return paidByList.find((item) => item.text === text);
+};
 
 export const paidByList: PaidByItem[] = [
   { key: 1, text: "Shalika", value: "Shalika" },

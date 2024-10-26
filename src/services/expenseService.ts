@@ -12,6 +12,15 @@ export const createExpense = (data: Expense) => {
   });
 };
 
+export const updateExpense = (id: number, data: Expense) => {
+  const token = localStorage.getItem("token");
+
+  return apiCall(`${EXPENSE_ENDPOINT}/${id}`, "PUT", data, {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  });
+};
+
 export const fetchExpenses = () => {
   const token = localStorage.getItem("token");
 
@@ -25,7 +34,7 @@ export const fetchExpenses = () => {
   );
 };
 
-export const fetchExpenseRecord = (id: number) => {
+export const fetchExpenseRecord = (id: string) => {
   const token = localStorage.getItem("token");
 
   return apiCall(
@@ -35,5 +44,16 @@ export const fetchExpenseRecord = (id: number) => {
     {
       Authorization: `Bearer ${token}`,
     },
+  );
+};
+
+export const deleteExpenseRecord = (id: string) => {
+  const token = localStorage.getItem("token");
+
+  return apiCall(
+    `${EXPENSE_ENDPOINT}/${id}`,
+    "DELETE",
+    {},
+    { Authorization: `Bearer ${token}` },
   );
 };

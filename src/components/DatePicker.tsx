@@ -8,6 +8,12 @@ interface DatePickerProps {
 const DatePicker: React.FC<DatePickerProps> = ({ date, onChangeHandler }) => {
   const [visible, setVisible] = useState(false);
 
+  const currentYear = new Date().getFullYear();
+  const currentMonth = new Date().getMonth();
+
+  const minDate = new Date(currentYear, 0, 1); // January 1st of the current year
+  const maxDate = new Date(currentYear, currentMonth, new Date().getDate()); // Last day of the current month
+
   return (
     <Space block direction="vertical" style={styles.container}>
       <div style={styles.label}>Date</div>
@@ -24,6 +30,8 @@ const DatePicker: React.FC<DatePickerProps> = ({ date, onChangeHandler }) => {
         confirmText="Confirm"
         weekStartsOn="Monday"
         onConfirm={onChangeHandler}
+        min={minDate}
+        max={maxDate}
       />
     </Space>
   );

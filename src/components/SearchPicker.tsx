@@ -1,5 +1,6 @@
 import React, { useCallback, useState, useRef, useEffect } from "react";
 import { Button, Modal, List, SearchBar } from "antd-mobile";
+
 import { CategoryItem } from "../constants/sheet";
 
 const EMPTY_ITEM = {
@@ -55,8 +56,9 @@ const SearchPicker: React.FC<SearchPickerProps> = ({
   const ModalContent = useCallback(() => {
     return (
       <List style={{ height: 400 }}>
-        {filterredItems.map((i) => (
+        {filterredItems.map((i, index) => (
           <List.Item
+            key={index}
             arrowIcon={false}
             style={{ color: data?.value === i.value ? "#ff8f1f" : "white" }}
             disabled={i.disabled}

@@ -147,6 +147,10 @@ html, body, #root {
     float: right;
     margin-right: 10px;
   }
+
+  .adm-image{
+    border-radius: 10px !important;
+  }
 /* * {
   border: 1px solid #bbb;
 } */

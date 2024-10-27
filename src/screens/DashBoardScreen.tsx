@@ -10,8 +10,9 @@ import {
 } from "antd-mobile-icons";
 
 import HomeScreen from "./HomeScreen";
-import PieChartComponent from "../components/PieChartComponent";
 import AddExpenseScreen from "./AddExpenseScreen";
+import ProfilePage from "./ProfilePage";
+import StatisticsPage from "./StatisticsPage";
 
 const DashBoardScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -52,13 +53,13 @@ const DashBoardScreen: React.FC = () => {
       key: "statistics",
       title: "Statistics",
       icon: <PieOutline />,
-      component: Statistics,
+      component: StatisticsPage,
     },
     {
       key: "profile",
       title: "Profile",
       icon: <UserOutline />,
-      component: Profile,
+      component: ProfilePage,
     },
   ];
 
@@ -88,14 +89,5 @@ const DashBoardScreen: React.FC = () => {
 export function Calendar() {
   return <div>Calendar</div>;
 }
-export function Profile() {
-  return <div>Profile</div>;
-}
-export function Statistics() {
-  return (
-    <div>
-      <PieChartComponent data={[]} />
-    </div>
-  );
-}
+
 export default DashBoardScreen;

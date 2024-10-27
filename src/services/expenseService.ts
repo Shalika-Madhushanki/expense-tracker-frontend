@@ -57,3 +57,19 @@ export const deleteExpenseRecord = (id: string) => {
     { Authorization: `Bearer ${token}` },
   );
 };
+
+export const fetchExpensesByMonth = (year: number, month: number) => {
+  console.log("year", year);
+  console.log("month", month);
+
+  const token = localStorage.getItem("token");
+
+  return apiCall(
+    `${EXPENSE_ENDPOINT}/by-month?year=${year}&month=${month}`,
+    "GET",
+    {},
+    {
+      Authorization: `Bearer ${token}`,
+    },
+  );
+};

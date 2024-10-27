@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Grid, Image, List, Space } from "antd-mobile";
+import { Grid, Image, List } from "antd-mobile";
 import { useNavigate } from "react-router-dom";
 import { LeftOutline } from "antd-mobile-icons";
 
-import { fetchExpenses } from "../services/expenseService";
+import { fetchExpensesByMonth } from "../services/expenseService";
 import { isTokenExpired } from "../utils/JwtUtils";
 import PieChartComponent, {
   PieChartDataItem,
@@ -55,7 +55,11 @@ const HomeScreen: React.FC = () => {
         );
       }
       try {
-        const data = await fetchExpenses();
+        const today = new Date();
+        const data = await fetchExpensesByMonth(
+          today.getUTCFullYear(),
+          today.getUTCMonth() + 1,
+        );
         if (data?.length) {
           setExpenseList(data);
         }

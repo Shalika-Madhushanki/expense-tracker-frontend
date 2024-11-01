@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { isTokenExpired } from "../utils/JwtUtils";
 
-const API_BASE_URL = "http://localhost:8080/api";
+const API_BASE_URL = "https://localhost:8443/api";
 
 const PUBLIC_ENDPOINTS = ["/auth/login", "/auth/signup"];
 

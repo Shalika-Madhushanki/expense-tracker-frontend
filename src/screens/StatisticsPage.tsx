@@ -7,7 +7,6 @@ import PieChartComponent, {
 } from "../components/PieChartComponent";
 import { fetchExpensesByMonth } from "../services/expenseService";
 import { Expense } from "./HomeScreen";
-import { isTokenExpired } from "../utils/JwtUtils";
 
 const StatisticsPage: React.FC = () => {
   const navigate = useNavigate();
@@ -40,13 +39,7 @@ const StatisticsPage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       setError("");
-      const token = localStorage.getItem("token");
-      if (token && isTokenExpired(token)) {
-        navigate("/login");
-        return Promise.reject(
-          new Error("Token expired, redirecting to login."),
-        );
-      }
+
       try {
         const today = new Date();
         const data = await fetchExpensesByMonth(
@@ -58,6 +51,9 @@ const StatisticsPage: React.FC = () => {
         }
       } catch (error: unknown) {
         if (error instanceof Error) {
+          if (error.message === "Token expired") {
+            navigate("/login");
+          }
           setError(error.message);
           console.error("Error fetching expenses:", error);
         } else {

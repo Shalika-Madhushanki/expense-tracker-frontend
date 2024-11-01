@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { LeftOutline } from "antd-mobile-icons";
 
 import { fetchExpensesByMonth } from "../services/expenseService";
-import { isTokenExpired } from "../utils/JwtUtils";
 import PieChartComponent, {
   PieChartDataItem,
 } from "../components/PieChartComponent";
@@ -47,13 +46,6 @@ const HomeScreen: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       setError("");
-      const token = localStorage.getItem("token");
-      if (token && isTokenExpired(token)) {
-        navigate("/login");
-        return Promise.reject(
-          new Error("Token expired, redirecting to login."),
-        );
-      }
       try {
         const today = new Date();
         const data = await fetchExpensesByMonth(
@@ -64,10 +56,20 @@ const HomeScreen: React.FC = () => {
           setExpenseList(data);
         }
       } catch (error: unknown) {
+        console.log("in catch");
+
         if (error instanceof Error) {
+          console.log("in catch if");
+
+          if (error.message === "Token expired") {
+            console.log("ich bin here");
+            navigate("/login");
+          }
           setError(error.message);
           console.error("Error fetching expenses:", error);
         } else {
+          console.log("in catch else");
+
           setError("Error occurred while fetching data");
         }
       }
@@ -147,7 +149,7 @@ const HomeScreen: React.FC = () => {
               prefix={
                 <Image
                   src={getCategoryIcon(record.category)}
-                  style={{ borderRadius: 20, backgroundColor: "white" }}
+                  style={{ borderRadius: 10, backgroundColor: "white" }}
                   fit="cover"
                   width={40}
                   height={40}

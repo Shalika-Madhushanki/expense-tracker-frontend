@@ -16,7 +16,6 @@ import {
 } from "../services/expenseService";
 import { formatDateToDDMMYYYY } from "../utils/DateUtils";
 import { Expense } from "./HomeScreen";
-import { isTokenExpired } from "../utils/JwtUtils";
 import {
   paidByList,
   categoryList,
@@ -49,13 +48,6 @@ const AddExpenseScreen: React.FC = () => {
       console.log("here:");
 
       const fetchExpenseData = async () => {
-        const token = localStorage.getItem("token");
-        if (token && isTokenExpired(token)) {
-          navigate("/login");
-          return Promise.reject(
-            new Error("Token expired, redirecting to login."),
-          );
-        }
         try {
           const data = await fetchExpenseRecord(id);
           console.log("data:", data);
@@ -64,6 +56,9 @@ const AddExpenseScreen: React.FC = () => {
           }
         } catch (error) {
           if (error instanceof Error) {
+            if (error.message === "Token expired") {
+              navigate("/login");
+            }
             setError(error.message);
             console.error("Error fetching expenses:", error);
           } else {
@@ -109,13 +104,6 @@ const AddExpenseScreen: React.FC = () => {
     const inputDate = new Date(data.date);
     const formattedDay = formatDateToDDMMYYYY(inputDate);
     data.date = formattedDay;
-
-    const token = localStorage.getItem("token");
-    if (token && isTokenExpired(token)) {
-      navigate("/login");
-      return Promise.reject(new Error("Token expired, redirecting to login."));
-    }
-
     try {
       if (operation === "edit") {
         await updateExpense(id, data);
@@ -128,6 +116,9 @@ const AddExpenseScreen: React.FC = () => {
     } catch (error: unknown) {
       setIsLoading(false);
       if (error instanceof Error) {
+        if (error.message === "Token expired") {
+          navigate("/login");
+        }
         console.error("error message: ", error.message);
         setError(error.message);
       } else {

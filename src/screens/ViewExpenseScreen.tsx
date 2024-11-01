@@ -7,7 +7,6 @@ import {
   deleteExpenseRecord,
   fetchExpenseRecord,
 } from "../services/expenseService";
-import { isTokenExpired } from "../utils/JwtUtils";
 import PageHeader from "../components/PageHeader";
 import { Action } from "antd-mobile/es/components/action-sheet";
 
@@ -71,6 +70,9 @@ const ViewExpenseScreen: React.FC = () => {
       return data;
     } catch (error) {
       if (error instanceof Error) {
+        if (error.message === "Token expired") {
+          navigate("/login");
+        }
         setError(error.message);
         console.error("Error fetching expenses:", error);
       } else {
@@ -82,13 +84,6 @@ const ViewExpenseScreen: React.FC = () => {
 
   useEffect(() => {
     const fetchExpenseData = async () => {
-      const token = localStorage.getItem("token");
-      if (token && isTokenExpired(token)) {
-        navigate("/login");
-        return Promise.reject(
-          new Error("Token expired, redirecting to login."),
-        );
-      }
       try {
         const data = await fetchExpenseRecord(id);
         if (data) {
@@ -96,6 +91,9 @@ const ViewExpenseScreen: React.FC = () => {
         }
       } catch (error) {
         if (error instanceof Error) {
+          if (error.message === "Token expired") {
+            navigate("/login");
+          }
           setError(error.message);
           console.error("Error fetching expenses:", error);
         } else {

@@ -86,9 +86,6 @@ const StatisticsPage: React.FC = () => {
       <Calendar
         selectionMode="single"
         defaultValue={defaultSingle}
-        onChange={(val) => {
-          console.log(val);
-        }}
         onPageChange={onPageChangeHandler}
       />
       <div className="chart-section">

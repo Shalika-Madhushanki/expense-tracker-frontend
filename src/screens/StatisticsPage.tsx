@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import PageHeader from "../components/PageHeader";
 import { useNavigate } from "react-router-dom";
-import { Calendar } from "antd-mobile";
+import { Calendar, Toast } from "antd-mobile";
 import PieChartComponent, {
   PieChartDataItem,
 } from "../components/PieChartComponent";
@@ -52,7 +52,7 @@ const StatisticsPage: React.FC = () => {
       } catch (error: unknown) {
         if (error instanceof Error) {
           if (error.message === "Token expired") {
-            navigate("/login");
+            navigate("/login", { replace: true });
           }
           setError(error.message);
           console.error("Error fetching expenses:", error);
@@ -71,7 +71,15 @@ const StatisticsPage: React.FC = () => {
       const data = await fetchExpensesByMonth(year, month);
       setExpenseList(data);
     } catch (error) {
-      //error
+      if (error instanceof Error) {
+        if (error.message === "Token expired") {
+          navigate("/login", { replace: true });
+        }
+        setError(error.message);
+        console.error("Error fetching expenses:", error);
+      } else {
+        setError("Error occurred while fetching data");
+      }
     }
   };
 
@@ -79,7 +87,7 @@ const StatisticsPage: React.FC = () => {
     <>
       <PageHeader
         onLeftActionClickHandler={() => {
-          navigate("/dashboard/home");
+          navigate("/dashboard/home", { replace: true });
         }}
         headerText="Statistics"
       />
@@ -91,6 +99,12 @@ const StatisticsPage: React.FC = () => {
       <div className="chart-section">
         <PieChartComponent data={chartData} />
       </div>
+      {/* {Toast.show({
+        content: error,
+        afterClose: () => {
+          console.log("after");
+        },
+      })} */}
     </>
   );
 };

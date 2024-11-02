@@ -19,7 +19,7 @@ const SignUpScreen: React.FC = () => {
   const [message, setMessage] = useState<Message>({ text: "", isError: false });
   const navigate = useNavigate();
 
-  const handleClick = () => { };
+  const handleClick = () => {};
 
   const handleOnFinish = async (values: FormValues): Promise<void> => {
     try {
@@ -29,7 +29,7 @@ const SignUpScreen: React.FC = () => {
         text: "Account created successfully. Please login!",
         isError: false,
       });
-      navigate("/login");
+      navigate("/login", { replace: true });
     } catch (error: unknown) {
       if (error instanceof Error) {
         setMessage({

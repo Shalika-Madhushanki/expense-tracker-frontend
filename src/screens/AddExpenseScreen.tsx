@@ -45,19 +45,16 @@ const AddExpenseScreen: React.FC = () => {
 
   useEffect(() => {
     if (operation === "edit") {
-      console.log("here:");
-
       const fetchExpenseData = async () => {
         try {
           const data = await fetchExpenseRecord(id);
-          console.log("data:", data);
           if (data) {
             setInitialData(data);
           }
         } catch (error) {
           if (error instanceof Error) {
             if (error.message === "Token expired") {
-              navigate("/login");
+              navigate("/login", { replace: true });
             }
             setError(error.message);
             console.error("Error fetching expenses:", error);
@@ -87,6 +84,7 @@ const AddExpenseScreen: React.FC = () => {
   };
   const handleSubmit = () => {
     const result = {
+      id,
       amount: amount,
       description: description,
       comments: comments,
@@ -117,7 +115,7 @@ const AddExpenseScreen: React.FC = () => {
       setIsLoading(false);
       if (error instanceof Error) {
         if (error.message === "Token expired") {
-          navigate("/login");
+          navigate("/login", { replace: true });
         }
         console.error("error message: ", error.message);
         setError(error.message);
@@ -148,8 +146,6 @@ const AddExpenseScreen: React.FC = () => {
     setComments(value);
   };
   const handleCategoryOnChange = (value: CategoryItem) => {
-    console.log("categor in slecte: ", value);
-
     setCategory(value);
   };
   const handlePaidByOnChange = (value: PaidByItem) => {
@@ -161,7 +157,7 @@ const AddExpenseScreen: React.FC = () => {
   const handleCloseDialog = () => {
     setIsDialogVisible(false);
     if (!error) {
-      navigate("/dashboard/home");
+      navigate("/dashboard/home", { replace: true });
     }
   };
   return (
@@ -169,49 +165,48 @@ const AddExpenseScreen: React.FC = () => {
       <PageHeader
         headerText={`${operation === "edit" ? "Update" : "Create"} Expense`}
         onLeftActionClickHandler={() => {
-          navigate("/dashboard/home");
+          navigate("/dashboard/home", { replace: true });
         }}
       />
-      <Space block direction="vertical" style={styles.container}>
-        <Space block direction="vertical">
-          <NumberInput
-            onChangeHandler={handleAmountOnChange}
-            label="Amount"
-            placeholder="0"
-            value={amount}
-          />
-          <TextInput
-            onChangeHandler={handleDescriptionOnChange}
-            label="Description"
-            placeholder="Hoffer"
-            value={description}
-          ></TextInput>
-          <TextInput
-            onChangeHandler={handleCommentsOnChange}
-            label="Comments"
-            placeholder="Vegitables & Fruits"
-            value={comments}
-          ></TextInput>
+      <div className="form-content" style={{ padding: "10px" }}>
+        <NumberInput
+          onChangeHandler={handleAmountOnChange}
+          label="Amount"
+          placeholder="0"
+          value={amount}
+        />
+        <TextInput
+          onChangeHandler={handleDescriptionOnChange}
+          label="Description"
+          placeholder="Hoffer"
+          value={description}
+        ></TextInput>
+        <TextInput
+          onChangeHandler={handleCommentsOnChange}
+          label="Comments"
+          placeholder="Vegitables & Fruits"
+          value={comments}
+        ></TextInput>
 
-          <SearchPicker
-            data={category}
-            items={categoryList}
-            instruction="Expense Category?"
-            label="Category"
-            onSelect={handleCategoryOnChange}
-          />
+        <SearchPicker
+          data={category}
+          items={categoryList}
+          instruction="Expense Category?"
+          label="Category"
+          onSelect={handleCategoryOnChange}
+        />
 
-          <Picker
-            data={paidBy}
-            items={paidByList}
-            instruction="Who did the payment?"
-            label="Paid By"
-            onSelect={handlePaidByOnChange}
-          />
-          <DatePicker onChangeHandler={handleDateOnChange} date={date} />
+        <Picker
+          data={paidBy}
+          items={paidByList}
+          instruction="Who did the payment?"
+          label="Paid By"
+          onSelect={handlePaidByOnChange}
+        />
+        <DatePicker onChangeHandler={handleDateOnChange} date={date} />
 
-          <span style={{ color: "red" }}>{error}</span>
-        </Space>
+        <span style={{ color: "red" }}>{error}</span>
+        {/* </Space> */}
 
         <Button
           type="submit"
@@ -222,52 +217,45 @@ const AddExpenseScreen: React.FC = () => {
         >
           {operation === "edit" ? "Update" : "Create"}
         </Button>
+      </div>
 
-        <Dialog
-          visible={isDialogVisible}
-          content={
-            isLoading ? (
-              <div style={styles.container}>
-                <span>Record is being added</span>
-                <DotLoading />
-              </div>
-            ) : (
-              <div>
-                <span>
-                  {error ? (
-                    <>
-                      <strong>Error occurred!</strong>
-                      <br />
-                      {error}
-                    </>
-                  ) : (
-                    "Record added successfully!"
-                  )}
-                </span>
-              </div>
-            )
-          }
-          closeOnAction
-          onClose={handleCloseDialog}
-          actions={[
-            {
-              key: "cancel",
-              text: "Close",
-              onClick: handleCloseDialog,
-              disabled: isLoading,
-            },
-          ]}
-        />
-      </Space>
+      <Dialog
+        visible={isDialogVisible}
+        content={
+          isLoading ? (
+            <div>
+              <span>Record is being added</span>
+              <DotLoading />
+            </div>
+          ) : (
+            <div>
+              <span>
+                {error ? (
+                  <>
+                    <strong>Error occurred!</strong>
+                    <br />
+                    {error}
+                  </>
+                ) : (
+                  "Record added successfully!"
+                )}
+              </span>
+            </div>
+          )
+        }
+        closeOnAction
+        onClose={handleCloseDialog}
+        actions={[
+          {
+            key: "cancel",
+            text: "Close",
+            onClick: handleCloseDialog,
+            disabled: isLoading,
+          },
+        ]}
+      />
     </>
   );
-};
-
-const styles = {
-  container: {
-    marginTop: 20,
-    padding: "10px",
-  },
 };
 
 export default AddExpenseScreen;

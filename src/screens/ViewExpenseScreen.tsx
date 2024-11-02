@@ -30,7 +30,7 @@ const ViewExpenseScreen: React.FC = () => {
       text: "Modify",
       key: "edit",
       disabled: false,
-      onClick: () => navigate(`/expenses/edit/${id}`),
+      onClick: () => navigate(`/expenses/edit/${id}`, { replace: true }),
     },
     {
       text: "Delete",
@@ -57,7 +57,7 @@ const ViewExpenseScreen: React.FC = () => {
                 content: "Record deletion successful",
                 position: "bottom",
               });
-              navigate("/dashboard/home");
+              navigate("/dashboard/home", { replace: true });
             }
           },
         }),
@@ -71,7 +71,7 @@ const ViewExpenseScreen: React.FC = () => {
     } catch (error) {
       if (error instanceof Error) {
         if (error.message === "Token expired") {
-          navigate("/login");
+          navigate("/login", { replace: true });
         }
         setError(error.message);
         console.error("Error fetching expenses:", error);
@@ -92,7 +92,7 @@ const ViewExpenseScreen: React.FC = () => {
       } catch (error) {
         if (error instanceof Error) {
           if (error.message === "Token expired") {
-            navigate("/login");
+            navigate("/login", { replace: true });
           }
           setError(error.message);
           console.error("Error fetching expenses:", error);
@@ -108,7 +108,7 @@ const ViewExpenseScreen: React.FC = () => {
       <PageHeader
         headerText="Expense Details"
         onLeftActionClickHandler={() => {
-          navigate("/dashboard/home");
+          navigate("/dashboard/home", { replace: true });
         }}
         onRightActionClickHandler={() => {
           setVisible(true);
@@ -142,6 +142,7 @@ const ViewExpenseScreen: React.FC = () => {
           </Space>
         </Card>
       </div>
+      <div>{error}</div>
       <ActionSheet
         visible={visible}
         actions={actions}

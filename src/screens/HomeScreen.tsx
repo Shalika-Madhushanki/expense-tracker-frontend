@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Grid, Image, List } from "antd-mobile";
 import { useNavigate } from "react-router-dom";
-import { LeftOutline } from "antd-mobile-icons";
 
 import { fetchExpensesByMonth } from "../services/expenseService";
 import PieChartComponent, {
   PieChartDataItem,
 } from "../components/PieChartComponent";
 import { categoryIconsMap } from "../constants/sheet";
+import PageHeader from "../components/PageHeader";
 
 export interface Expense {
   id: number;
@@ -58,7 +58,7 @@ const HomeScreen: React.FC = () => {
       } catch (error: unknown) {
         if (error instanceof Error) {
           if (error.message === "Token expired") {
-            navigate("/login");
+            navigate("/login", { replace: true });
           }
           setError(error.message);
           console.error("Error fetching expenses:", error);
@@ -81,20 +81,12 @@ const HomeScreen: React.FC = () => {
   return (
     <>
       <div className="top-section">
-        <div className="top-section-child page-header">
-          <div className="back-action">
-            <LeftOutline
-              onClick={() => {
-                navigate("/login");
-              }}
-              className="icon"
-            />
-          </div>
-          <div className="header-text">
-            <h2>Expense Dashboard</h2>
-          </div>
-          <div className="some-action"></div>
-        </div>
+        <PageHeader
+          headerText={"Expense Dashboard"}
+          onLeftActionClickHandler={() => {
+            navigate("/login", { replace: true });
+          }}
+        />
         <div className="top-section-child chart-section">
           <PieChartComponent data={chartData} />
         </div>
@@ -136,7 +128,7 @@ const HomeScreen: React.FC = () => {
           {expenseList.map((record: Expense, index) => (
             <List.Item
               onClick={() => {
-                navigate(`/expenses/view/${record.id}`);
+                navigate(`/expenses/view/${record.id}`, { replace: true });
               }}
               key={index}
               prefix={

@@ -2,7 +2,12 @@ import React from "react";
 import { ConfigProvider } from "antd-mobile";
 import enUS from "antd-mobile/es/locales/en-US";
 
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
 
 import LoginScreen from "./screens/LoginScreen";
 import SignUpScreen from "./screens/SignUpScreen";
@@ -12,8 +17,9 @@ import ViewExpenseScreen from "./screens/ViewExpenseScreen";
 const App: React.FC = () => {
   return (
     <ConfigProvider locale={enUS}>
-      <BrowserRouter>
+      <Router>
         <Routes>
+          <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/dashboard/*" element={<DashBoardScreen />} />
           <Route path="/signup" element={<SignUpScreen />} />
@@ -21,7 +27,7 @@ const App: React.FC = () => {
           <Route path="/expenses/view/:id" element={<ViewExpenseScreen />} />
           <Route path="/expenses/edit/:id" element={<AddExpenseScreen />} />
         </Routes>
-      </BrowserRouter>
+      </Router>
     </ConfigProvider>
   );
 };

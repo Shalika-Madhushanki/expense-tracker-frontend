@@ -1,4 +1,6 @@
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   /* overflow: hidden;  */
@@ -22,135 +24,230 @@ html, body, #root {
   display: flex;
   margin: auto;
   flex-direction: column;
-  justify-content: center; /* Vertical centering */
-  align-items: center; /* Horizontal centering */
-  height: 100vh; /* Full viewport height */
+  justify-content: center;
+  /* Vertical centering */
+  align-items: center;
+  /* Horizontal centering */
+  height: 100vh;
+  /* Full viewport height */
   width: 100%;
-  padding: 10px; /* Equal padding on all sides */
-  box-sizing: border-box; /* Padding included in the width/height */
+  padding: 10px;
+  /* Equal padding on all sides */
+  box-sizing: border-box;
+  /* Padding included in the width/height */
 }
 
 .signup-link {
-  margin-top: 15px; /* Adds spacing between the form and the link */
-  text-align: center; /* Centers the link text */
-  width: 100%; /* Makes the link occupy full width below the form */
+  margin-top: 15px;
+  /* Adds spacing between the form and the link */
+  text-align: center;
+  /* Centers the link text */
+  width: 100%;
+  /* Makes the link occupy full width below the form */
 }
 
-.adm-list-header{
+.adm-list-header {
   font-size: 23px
 }
 
 .form-header {
   text-align: center;
-  margin-bottom: 20px; /* Adds spacing between header and form */
+  margin-bottom: 20px;
+  /* Adds spacing between header and form */
 }
 
 .form-header h1 {
-  font-size: 2rem; /* Makes the header text bigger */
+  font-size: 2rem;
+  /* Makes the header text bigger */
   color: #777474;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serifx 
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serifx
 }
 
-  .dashboard-container {
-    height: 100vh; /* Full viewport height */
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    overflow: hidden; 
+.dashboard-container {
+  height: 100vh;
+  /* Full viewport height */
+  display: flex;
+  flex-direction: column;
+  /* Stack items vertically */
+  overflow: hidden;
 
-  }
+}
 
-  .content {
-    flex: 1; /* Takes up the remaining space */
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 50px); /* Calculate height by subtracting the TabBar height */
-  }
+.content {
+  flex: 1;
+  /* Takes up the remaining space */
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 50px);
+  /* Calculate height by subtracting the TabBar height */
+}
 
-  .tab-bar {
-    flex-shrink: 0;
-    /* height: 50px; /* Explicit height for TabBar */} */
+.tab-bar {
+  flex-shrink: 0;
+}
 
-  /* .top-section {
-    display: flex;
-    padding: 0; 
-    flex: 1; 
-    overflow-y: auto; 
-    justify-content: center; 
-    align-items: center; 
-    flex-direction: column;
+.top-section {
+  display: flex;
+  flex: 1;
+  /* Top section takes up half of the remaining space */
+  justify-content: center;
+  /* Horizontally center content */
+  align-items: center;
+  /* Vertically center content */
+  flex-direction: column;
+  padding: 0;
+  /* Remove padding */
+}
 
-  } */
-  .top-section {
-    display: flex;
-    flex: 1; /* Top section takes up half of the remaining space */
-    justify-content: center; /* Horizontally center content */
-    align-items: center; /* Vertically center content */
-    flex-direction: column;
-    padding: 0; /* Remove padding */
-    background-color: #f7f7f7; /* Adjust background if needed */
-  }
+.page-header {
+  height: 50px;
+  flex-shrink: 0;
+  display: flex;
+  text-align: center;
+  font-family: Verdana, sans-serif;
+  justify-content: space-between;
+  width: 100%;
+}
 
-  .page-header{
-    height: 50px; 
-    flex-shrink: 0;
-    display: flex; 
-    text-align: center;
-    font-family: Verdana, sans-serif;
-    justify-content:space-between
-  }
-  .chart-section {
-    flex: 1;
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    width: 100%; 
-    max-height: 100%;
-  }
-  
+.chart-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-height: 100%;
+}
 
-  .back-action{
-    /* flex: 1;  */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    float: left;
-    margin-left: 10px;
 
-  }
+.back-action {
+  /* flex: 1;  */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  float: left;
+  margin-left: 10px;
 
-  .header-text{
-    flex: 3; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+}
 
-  .icon{
-    background-color: #343131;
-    padding: 8px;
-    border-radius: 15%;
-  }
+.header-text {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .bottom-section {
-    flex: 1; /* Bottom section takes up 50% of the available space */
-    overflow-y: auto; /* Allow scrolling if list gets too long */
-    padding: 0;
-  }
+.icon {
+  background-color: #343131;
+  padding: 8px;
+  border-radius: 15%;
+}
 
-  .some-action{
-    /* flex: 1;  */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    float: right;
-    margin-right: 10px;
-  }
+.bottom-section {
+  flex: 1;
+  /* Bottom section takes up 50% of the available space */
+  overflow-y: auto;
+  /* Allow scrolling if list gets too long */
+  padding: 0;
+}
 
-  .adm-image{
-    border-radius: 10px !important;
-  }
+.some-action {
+  /* flex: 1;  */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  float: right;
+  margin-right: 10px;
+}
+
 /* * {
   border: 1px solid #bbb;
 } */
+
+
+.profile-card {
+  width: 100%;
+  max-width: 400px;
+  background-color: #1c2d3f;
+  color: #ffffff;
+  padding: 20px;
+  /* box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); */
+  /* margin: 20px auto; */
+  font-family: Arial, sans-serif;
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.profile-name {
+  font-size: 1.5em;
+  margin: 5px 0;
+}
+
+.membership-status {
+  font-size: 0.9em;
+  color: #e2a03f;
+}
+
+.contact-info {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.contact-info p {
+  margin: 5px 0;
+}
+
+.settings {
+  border-top: 1px solid #333;
+  padding-top: 15px;
+}
+
+.setting-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 1em;
+}
+
+.setting-option:not(:last-child) {
+  border-bottom: 1px solid #333;
+}
+
+/* Checkbox styling (dark mode switch) */
+.setting-option input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .profile-card {
+    padding: 15px;
+    width: 95%;
+  }
+
+  .profile-name {
+    font-size: 1.3em;
+  }
+
+  .setting-option {
+    font-size: 0.9em;
+  }
+}

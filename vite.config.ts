@@ -30,12 +30,12 @@ export default defineConfig({
       },
     }),
   ],
-  server: {
-    https: {
-      key: fs.readFileSync(path.resolve(__dirname, "key.pem")),
-      cert: fs.readFileSync(path.resolve(__dirname, "cert.pem")),
-    },
-  },
+  // server: {
+  //   https: {
+  //     key: fs.readFileSync(path.resolve(__dirname, "key.pem")),
+  //     cert: fs.readFileSync(path.resolve(__dirname, "cert.pem")),
+  //   },
+  // },
   base:
     process.env.NODE_ENV === "production" ? "/expense-tracker-frontend/" : "/",
 });

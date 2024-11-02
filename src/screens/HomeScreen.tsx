@@ -56,6 +56,8 @@ const HomeScreen: React.FC = () => {
           setExpenseList(data);
         }
       } catch (error: unknown) {
+        console.log("in catch");
+
         if (error instanceof Error) {
           if (error.message === "Token expired") {
             navigate("/login", { replace: true });
@@ -63,6 +65,8 @@ const HomeScreen: React.FC = () => {
           setError(error.message);
           console.error("Error fetching expenses:", error);
         } else {
+          console.log("in catch else");
+
           setError("Error occurred while fetching data");
         }
       }

@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  PieChart,
-  Pie,
-  Tooltip,
-  Cell,
-  Sector,
-  ResponsiveContainer,
-} from "recharts";
+import { PieChart, Pie, Tooltip, Cell, Sector } from "recharts";
 
 const COLORS = [
   "#624E88",
@@ -27,7 +20,7 @@ interface PieChartComponentProps {
   data: PieChartDataItem[];
 }
 const PieChartComponent: React.FC<PieChartComponentProps> = ({ data }) => {
-  const totalValue = data.reduce((sum, item) => sum + item.value, 0);
+  // const totalValue = data.reduce((sum, item) => sum + item.value, 0);
   return (
     <div>
       {/* <ResponsiveContainer> */}
@@ -36,7 +29,7 @@ const PieChartComponent: React.FC<PieChartComponentProps> = ({ data }) => {
           data={data}
           cx="50%"
           cy="50%"
-          label={({ name, percent }) => `${(percent * 100).toFixed(0)}%`}
+          label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
           innerRadius={60}
           outerRadius={80}
           fill="#8884d8"

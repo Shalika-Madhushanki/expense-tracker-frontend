@@ -15,7 +15,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ date, onChangeHandler }) => {
   const maxDate = new Date(currentYear, currentMonth, new Date().getDate()); // Last day of the current month
 
   return (
-    <Space block direction="vertical" style={styles.container}>
+    <Space block direction="vertical">
       <div style={styles.label}>Date</div>
       <Button block onClick={() => setVisible(true)}>
         {date ? date.toDateString() : "Select Date"}

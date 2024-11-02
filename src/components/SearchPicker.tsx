@@ -20,7 +20,6 @@ interface SearchPickerProps {
 const SearchPicker: React.FC<SearchPickerProps> = ({
   data,
   items,
-  instruction,
   label,
   onSelect,
 }) => {

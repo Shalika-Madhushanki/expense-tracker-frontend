@@ -1,7 +1,19 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { isTokenExpired } from "../utils/JwtUtils";
 
-const API_BASE_URL = "https://localhost:8443/api";
+const HOST_NAME = import.meta.env.VITE_HOST_NAME;
+const API_BASE_URL = `${HOST_NAME}/api`;
+
+type HttpMethod =
+  | "GET"
+  | "POST"
+  | "PUT"
+  | "DELETE"
+  | "PATCH"
+  | "HEAD"
+  | "OPTIONS";
+
+type RequestBody = Record<string, unknown> | FormData | null;
 
 const PUBLIC_ENDPOINTS = ["/auth/login", "/auth/signup"];
 
@@ -46,8 +58,8 @@ api.interceptors.response.use(
 
 export const apiCall = async (
   endpoint: string,
-  method: string,
-  body: any = null,
+  method: HttpMethod,
+  body: RequestBody = null,
   customHeaders: Record<string, string> = {},
 ) => {
   const config: AxiosRequestConfig = {

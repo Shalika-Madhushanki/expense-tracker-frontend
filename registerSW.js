@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/expense-tracker-frontend/sw.js', { scope: '/expense-tracker-frontend/' })})}

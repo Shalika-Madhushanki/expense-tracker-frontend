@@ -52,7 +52,7 @@ const StatisticsPage: React.FC = () => {
       } catch (error: unknown) {
         if (error instanceof Error) {
           if (error.message === "Token expired") {
-            navigate("/login", { replace: true });
+            navigate("/login");
           }
           setError(error.message);
           console.error("Error fetching expenses:", error);
@@ -73,7 +73,7 @@ const StatisticsPage: React.FC = () => {
     } catch (error) {
       if (error instanceof Error) {
         if (error.message === "Token expired") {
-          navigate("/login", { replace: true });
+          navigate("/login");
         }
         setError(error.message);
         console.error("Error fetching expenses:", error);
@@ -87,7 +87,7 @@ const StatisticsPage: React.FC = () => {
     <>
       <PageHeader
         onLeftActionClickHandler={() => {
-          navigate("/dashboard/home", { replace: true });
+          navigate("/dashboard/home");
         }}
         headerText="Statistics"
       />

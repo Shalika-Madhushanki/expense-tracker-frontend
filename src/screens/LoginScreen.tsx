@@ -23,7 +23,7 @@ const LoginScreen: React.FC = () => {
       );
       localStorage.setItem("token", data?.token);
       form.resetFields();
-      navigate("/dashboard/home", { replace: true });
+      navigate("/dashboard/home");
     } catch (error: unknown) {
       if (error instanceof Error) {
         setError(error.message);

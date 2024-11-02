@@ -60,7 +60,7 @@ const HomeScreen: React.FC = () => {
 
         if (error instanceof Error) {
           if (error.message === "Token expired") {
-            navigate("/login", { replace: true });
+            navigate("/login");
           }
           setError(error.message);
           console.error("Error fetching expenses:", error);
@@ -88,7 +88,7 @@ const HomeScreen: React.FC = () => {
         <PageHeader
           headerText={"Expense Dashboard"}
           onLeftActionClickHandler={() => {
-            navigate("/login", { replace: true });
+            navigate("/login");
           }}
         />
         <div className="top-section-child chart-section">
@@ -132,7 +132,7 @@ const HomeScreen: React.FC = () => {
           {expenseList.map((record: Expense, index) => (
             <List.Item
               onClick={() => {
-                navigate(`/expenses/view/${record.id}`, { replace: true });
+                navigate(`/expenses/view/${record.id}`);
               }}
               key={index}
               prefix={

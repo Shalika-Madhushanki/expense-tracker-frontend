@@ -19,7 +19,7 @@ const DashBoardScreen: React.FC = () => {
   const location = useLocation();
   const { pathname } = location;
   const setRouteActive = (value: string) => {
-    navigate(value, { replace: true });
+    navigate(value);
   };
   const tabs = [
     {

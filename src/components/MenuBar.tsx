@@ -13,7 +13,7 @@ const MenuBar: React.FC = () => {
   const { pathname } = location;
   const navigate = useNavigate();
   const setRouteActive = (value: string) => {
-    navigate(value, { replace: true });
+    navigate(value);
   };
 
   const tabs = [

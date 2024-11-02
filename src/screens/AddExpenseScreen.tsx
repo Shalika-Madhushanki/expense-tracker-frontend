@@ -54,7 +54,7 @@ const AddExpenseScreen: React.FC = () => {
         } catch (error) {
           if (error instanceof Error) {
             if (error.message === "Token expired") {
-              navigate("/login", { replace: true });
+              navigate("/login");
             }
             setError(error.message);
             console.error("Error fetching expenses:", error);
@@ -115,7 +115,7 @@ const AddExpenseScreen: React.FC = () => {
       setIsLoading(false);
       if (error instanceof Error) {
         if (error.message === "Token expired") {
-          navigate("/login", { replace: true });
+          navigate("/login");
         }
         console.error("error message: ", error.message);
         setError(error.message);
@@ -157,7 +157,7 @@ const AddExpenseScreen: React.FC = () => {
   const handleCloseDialog = () => {
     setIsDialogVisible(false);
     if (!error) {
-      navigate("/dashboard/home", { replace: true });
+      navigate("/dashboard/home");
     }
   };
   return (
@@ -165,7 +165,7 @@ const AddExpenseScreen: React.FC = () => {
       <PageHeader
         headerText={`${operation === "edit" ? "Update" : "Create"} Expense`}
         onLeftActionClickHandler={() => {
-          navigate("/dashboard/home", { replace: true });
+          navigate("/dashboard/home");
         }}
       />
       <div className="form-content" style={{ padding: "10px" }}>

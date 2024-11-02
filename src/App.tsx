@@ -3,7 +3,7 @@ import { ConfigProvider } from "antd-mobile";
 import enUS from "antd-mobile/es/locales/en-US";
 
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Navigate,
   Route,
   Routes,

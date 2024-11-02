@@ -29,7 +29,7 @@ const SignUpScreen: React.FC = () => {
         text: "Account created successfully. Please login!",
         isError: false,
       });
-      navigate("/login", { replace: true });
+      navigate("/login");
     } catch (error: unknown) {
       if (error instanceof Error) {
         setMessage({

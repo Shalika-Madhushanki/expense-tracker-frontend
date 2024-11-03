@@ -7,7 +7,7 @@ import {
   Picker,
   SearchPicker,
 } from "../components";
-import { Dialog, DotLoading, Button, Space } from "antd-mobile";
+import { Dialog, DotLoading, Button } from "antd-mobile";
 
 import {
   createExpense,

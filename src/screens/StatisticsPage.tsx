@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import PageHeader from "../components/PageHeader";
 import { useNavigate } from "react-router-dom";
-import { Calendar, Toast } from "antd-mobile";
+import { Calendar } from "antd-mobile";
 import PieChartComponent, {
   PieChartDataItem,
 } from "../components/PieChartComponent";
@@ -99,12 +99,7 @@ const StatisticsPage: React.FC = () => {
       <div className="chart-section">
         <PieChartComponent data={chartData} />
       </div>
-      {/* {Toast.show({
-        content: error,
-        afterClose: () => {
-          console.log("after");
-        },
-      })} */}
+      <div>{error}</div>
     </>
   );
 };
